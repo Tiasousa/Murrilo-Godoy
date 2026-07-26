@@ -12,7 +12,8 @@
   <link rel="shortcut icon" href="icon-192.png">
   <!-- Nome do app + tela cheia + cor do tema -->
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-status-bar-background-color" content="#0A1A33">
   <meta name="apple-mobile-web-app-title" content="Gabinete Digital">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="application-name" content="Gabinete Digital">
@@ -23,10 +24,9 @@
     /* respeita a faixa de cima do iPhone (relógio/notch) em tela cheia */
     #app {
       position: fixed;
-      top: env(safe-area-inset-top, 0px);
-      left: 0; right: 0; bottom: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       width: 100%;
-      height: calc(100% - env(safe-area-inset-top, 0px));
+      height: 100%;
       border: 0;
     }
     #abrindo {
