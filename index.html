@@ -38,11 +38,11 @@
       color: #EAF1FB; font-family: 'Segoe UI', system-ui, sans-serif; z-index: 2;
       transition: opacity .5s ease;
     }
-    #abrindo img { width: 210px; height: auto; border-radius: 18px; box-shadow: 0 15px 40px rgba(0,0,0,.5); animation: surgirLogo .7s cubic-bezier(.22,1,.36,1) both; }
-    @keyframes surgirLogo { from { opacity:0; transform: scale(.8) translateY(10px); } to { opacity:1; transform: scale(1) translateY(0); } }
-    #abrindo .marca { animation: surgirTexto .6s ease .15s both; }
-    #abrindo .sub { animation: surgirTexto .6s ease .3s both; }
-    @keyframes surgirTexto { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
+    #abrindo img { width: 260px; height: auto; border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,.35); animation: surgirLogo .8s cubic-bezier(.22,1,.36,1) both; }
+    @keyframes surgirLogo { 0% { opacity:0; transform: scale(.6) translateY(20px); } 70% { opacity:1; transform: scale(1.05) translateY(0); } 100% { transform: scale(1) translateY(0); } }
+    #abrindo .marca { animation: surgirTexto .6s ease .25s both; }
+    #abrindo .sub { animation: surgirTexto .6s ease .45s both; }
+    @keyframes surgirTexto { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
     #abrindo .marca { font-size: 22px; font-weight: 800; letter-spacing: 1px; }
     #abrindo .marca .gabinete { color: #ffffff; }
     #abrindo .marca .digital { color: #C1272D; }
