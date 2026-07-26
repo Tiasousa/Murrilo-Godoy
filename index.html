@@ -2,65 +2,262 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+  >
+
   <title>Gabinete Digital - Vereador Murillo Godoy</title>
-  <!-- Ícone da tela inicial (arquivo icon-192.png na MESMA pasta) -->
-  <link rel="apple-touch-icon" href="icon-192.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="icon-192.png">
-  <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
-  <link rel="icon" type="image/png" href="icon-192.png">
-  <link rel="shortcut icon" href="icon-192.png">
-  <!-- Nome do app + tela cheia + cor do tema -->
+
+  <link rel="apple-touch-icon" sizes="180x180" href="./icon-192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
+  <link rel="manifest" href="./manifest.json">
+
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Gabinete Digital">
+
+  <!-- Não usar black-translucent -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="application-name" content="Gabinete Digital">
-  <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0A1A33">
+
   <style>
-    html, body { margin: 0; height: 100%; background: #0A1A33; }
-    /* respeita a faixa de cima do iPhone (relógio/notch) em tela cheia */
-    #app {
-      position: fixed;
-      top: env(safe-area-inset-top, 0px);
-      left: 0; right: 0; bottom: 0;
+    :root {
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      margin: 0;
+      padding: 0;
       width: 100%;
-      height: calc(100% - env(safe-area-inset-top, 0px));
+      height: 100%;
+      overflow: hidden;
+      background: #0A1A33;
+    }
+
+    body {
+      position: fixed;
+      inset: 0;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #0A1A33;
+      overscroll-behavior: none;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    #app-container {
+      position: fixed;
+
+      top: var(--safe-top);
+      right: var(--safe-right);
+      bottom: var(--safe-bottom);
+      left: var(--safe-left);
+
+      overflow: hidden;
+      background: #F7F7F8;
+    }
+
+    #app {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      max-width: 100%;
       border: 0;
+      margin: 0;
+      padding: 0;
+      background: #F7F7F8;
     }
+
     #abrindo {
-      position: fixed; inset: 0; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 18px;
-      background: radial-gradient(circle at 15% 10%, rgba(60,110,220,.35) 0%, transparent 45%),
-                  radial-gradient(circle at 85% 25%, rgba(60,110,220,.25) 0%, transparent 40%),
-                  linear-gradient(180deg, #0B1A33 0%, #060B18 100%);
-      color: #EAF1FB; font-family: 'Segoe UI', system-ui, sans-serif; z-index: 2;
-      transition: opacity .5s ease;
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+
+      padding-top: var(--safe-top);
+      padding-right: var(--safe-right);
+      padding-bottom: var(--safe-bottom);
+      padding-left: var(--safe-left);
+
+      background:
+        radial-gradient(
+          circle at 15% 10%,
+          rgba(60, 110, 220, 0.35) 0%,
+          transparent 45%
+        ),
+        radial-gradient(
+          circle at 85% 25%,
+          rgba(60, 110, 220, 0.25) 0%,
+          transparent 40%
+        ),
+        linear-gradient(180deg, #0B1A33 0%, #060B18 100%);
+
+      color: #EAF1FB;
+      font-family: "Segoe UI", system-ui, sans-serif;
+
+      transition:
+        opacity 0.4s ease,
+        visibility 0.4s ease;
     }
-    #abrindo img { width: 260px; height: auto; border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,.35); animation: surgirLogo .8s cubic-bezier(.22,1,.36,1) both; }
-    @keyframes surgirLogo { 0% { opacity:0; transform: scale(.6) translateY(20px); } 70% { opacity:1; transform: scale(1.05) translateY(0); } 100% { transform: scale(1) translateY(0); } }
-    #abrindo .marca { animation: surgirTexto .6s ease .25s both; }
-    #abrindo .sub { animation: surgirTexto .6s ease .45s both; }
-    @keyframes surgirTexto { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
-    #abrindo .marca { font-size: 22px; font-weight: 800; letter-spacing: 1px; }
-    #abrindo .marca .gabinete { color: #ffffff; }
-    #abrindo .marca .digital { color: #C1272D; }
-    #abrindo .sub { font-size: 11px; letter-spacing: 2.5px; color: #8b93aa; }
-    #abrindo .anel { width: 36px; height: 36px; border: 3px solid rgba(37,99,235,.25); border-top-color: #2563EB; border-radius: 50%; animation: girar .9s linear infinite; }
-    @keyframes girar { to { transform: rotate(360deg); } }
-    #abrindo a { margin-top: 8px; color: #9fb6d6; font-size: 13px; text-decoration: underline; }
+
+    #abrindo.oculto {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    #abrindo img {
+      display: block;
+      width: 180px;
+      max-width: 55vw;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+      animation: surgirLogo 0.8s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    #abrindo .marca {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      animation: surgirTexto 0.6s ease 0.25s both;
+    }
+
+    #abrindo .gabinete {
+      color: #FFFFFF;
+    }
+
+    #abrindo .digital {
+      color: #C1272D;
+    }
+
+    #abrindo .sub {
+      color: #8B93AA;
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-align: center;
+      animation: surgirTexto 0.6s ease 0.45s both;
+    }
+
+    #abrindo .anel {
+      width: 36px;
+      height: 36px;
+      border: 3px solid rgba(37, 99, 235, 0.25);
+      border-top-color: #2563EB;
+      border-radius: 50%;
+      animation: girar 0.9s linear infinite;
+    }
+
+    #abrindo a {
+      margin-top: 8px;
+      color: #9FB6D6;
+      font-size: 13px;
+      text-decoration: underline;
+    }
+
+    @keyframes surgirLogo {
+      0% {
+        opacity: 0;
+        transform: scale(0.6) translateY(20px);
+      }
+
+      70% {
+        opacity: 1;
+        transform: scale(1.05) translateY(0);
+      }
+
+      100% {
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    @keyframes surgirTexto {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes girar {
+      to {
+        transform: rotate(360deg);
+      }
+    }
   </style>
 </head>
+
 <body>
   <div id="abrindo">
-    <img src="icon-192.png" alt="Gabinete Digital" onerror="this.style.display='none'">
-    <div class="marca"><span class="gabinete">GABINETE</span> <span class="digital">DIGITAL</span></div>
+    <img
+      src="./icon-192.png"
+      alt="Gabinete Digital"
+      onerror="this.style.display='none'"
+    >
+
+    <div class="marca">
+      <span class="gabinete">GABINETE</span>
+      <span class="digital">DIGITAL</span>
+    </div>
+
     <div class="sub">VEREADOR MURILLO GODOY</div>
+
     <div class="anel"></div>
-    <a href="https://script.google.com/macros/s/AKfycbwqxDctgqrvwpgGvMbsQLKLjYFB4HGWLCmJD4H1e7MxOIMrNjFSwBgKntRgPwwLADE9kg/exec" target="_blank">Não abriu? Toque aqui</a>
+
+    <a
+      href="https://script.google.com/macros/s/AKfycbwqxDctgqrvwpgGvMbsQLKLjYFB4HGWLCmJD4H1e7MxOIMrNjFSwBgKntRgPwwLADE9kg/exec"
+    >
+      Não abriu? Toque aqui
+    </a>
   </div>
-  <iframe id="app" src="https://script.google.com/macros/s/AKfycbwqxDctgqrvwpgGvMbsQLKLjYFB4HGWLCmJD4H1e7MxOIMrNjFSwBgKntRgPwwLADE9kg/exec"
-    onload="document.getElementById('abrindo').style.opacity='0'; setTimeout(function(){document.getElementById('abrindo').style.display='none';}, 600);"></iframe>
+
+  <div id="app-container">
+    <iframe
+      id="app"
+      title="Gabinete Digital"
+      scrolling="yes"
+      allow="geolocation; camera; microphone"
+      src="https://script.google.com/macros/s/AKfycbwqxDctgqrvwpgGvMbsQLKLjYFB4HGWLCmJD4H1e7MxOIMrNjFSwBgKntRgPwwLADE9kg/exec"
+    ></iframe>
+  </div>
+
+  <script>
+    const iframe = document.getElementById("app");
+    const abertura = document.getElementById("abrindo");
+
+    iframe.addEventListener("load", function () {
+      setTimeout(function () {
+        abertura.classList.add("oculto");
+      }, 400);
+    });
+
+    setTimeout(function () {
+      abertura.classList.add("oculto");
+    }, 10000);
+  </script>
 </body>
 </html>
